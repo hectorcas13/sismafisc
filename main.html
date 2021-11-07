@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="short icon" href="img/prof.ico">
+    <title>Login</title>
+</head>
+<body>
+<br>
+<br>
+
+  <div class="container" id="formlg">
+    <center>
+      <div style="padding-left:40px;">
+          <img src="img/candado.png" alt="imagen de usuario" id="logimg">
+      </div>
+    </center>
+    <br>
+    <center>
+      <form class="form-horizontal" action="validar.php" method="post" autocomplete="on" accept-charset="ISO-8859-1" >
+        <div class="form-group">
+            <label class="control-label" for="user" ><kbd>Usuario:</kbd></label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="usr" placeholder="Usuario" name="usr" autofocus required >
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label " for="pwd" ><kbd>Contraseña:</kbd></label>
+          <div class="col-sm-5">          
+            <input type="password" class="form-control" id="pwd" placeholder="Contraseña" required name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Por lo menos un número, una mayúscula, una minúscula y por lo menos 8 carácteres">
+            <input type="checkbox" onclick="VerContra()">Mostrar contraseña
+            <p id="text">WARNING! Caps lock is ON.</p>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">        
+          <div class="col-md-offset-8 col-sm-10" >
+            <button type="submit" class="btn btn-dark" onclick="Validar(document.getElementById('usuario').value, document.getElementById('password').value);">Acceder</button>
+          </div>
+        </div>
+      </form>
+      <!-- Div de alerta-->
+      <div id="resultado"></div>
+    </center>
+  </div>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+      var input = document.getElementById("pwd");
+      var text = document.getElementById("text");
+      input.addEventListener("keyup", function(event) {
+      
+      if (event.getModifierState("CapsLock")) {
+          text.style.display = "block";
+        } else {
+          text.style.display = "none"
+        }
+      });
+
+      function VerContra() {
+        var x = document.getElementById("pwd");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+  </script>
+<style>
+    #text {display:none;color:red}
+</style>
+</body>
+</html>
